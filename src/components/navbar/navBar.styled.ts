@@ -8,7 +8,7 @@ interface NavItemProps {
 export const NavBarStyled = styled.div`
   background-color: lightGrey; /* White background for the navbar */
   border-top: 1px solid #e1e4e8; /* Separator line above the navbar */
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
   box-shadow: inset 1px 0 0 #e0e0e0, inset -1px 0 0 #e0e0e0; /* Side shadows */
   display: flex;
   justify-content: space-around;

@@ -4,6 +4,7 @@ import { RepoDescriptionStyled, RepoFooterStyled, RepoItemStyled, RepoListContai
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import { getstarValues } from "../../util/theme/helper";
+import HandleError from "../handleError/handleError";
 
 type RepoListType = {
   id: number;
@@ -22,7 +23,7 @@ export type RepoItems = {
   hasError: boolean,
   errorMessage: string,
   items: RepoListType[],
-  hasMore?:boolean,
+  hasMore?: boolean,
   incomplete_results?: boolean
 }
 
@@ -40,7 +41,7 @@ const RepoList = () => {
     if (repoList.hasError) {
       toast.error("Failed to fetch data");
       setErrorMessage(true);
-    } else { 
+    } else {
       setRepoData((prev: RepoListType[]) => [...prev, ...repoList.items]);
       setErrorMessage(false)
     }
@@ -57,7 +58,7 @@ const RepoList = () => {
     }
   }, [hasMore]);
 
- 
+
 
 
   useEffect(() => {
@@ -104,22 +105,9 @@ const RepoList = () => {
       </RepoItemStyled>
     ))}
 
-    {errorMesage && (<div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-      padding: '2rem',
-      textAlign: 'center',
-    }}>
-      <div>Something went wrong. API get failed.</div>
-      <button
-        style={{ padding: '0.5rem', marginTop: '1rem' }}
-        onClick={fetchRepoList}
-      >
-        Retry
-      </button>
-    </div>)}
+    {errorMesage && (
+      <HandleError errorMessage="Something went wrong. API get failed." onRetry={fetchRepoList} />
+    )}
 
     {hasMore && !errorMesage && <div ref={loaderRef} style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}
 
