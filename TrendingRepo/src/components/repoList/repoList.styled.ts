@@ -2,8 +2,7 @@ import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
 
 
-// RepoListStyled: This is the scrollable area containing the repository items.
-// It expands to fill the available space between the header and the navbar.
+
 export const RepoListContainerStyled = styled.div`
   flex: 1; /* Allows this component to grow and take all available vertical space */
   overflow-y: auto; /* Enables vertical scrolling for the repository list */
@@ -22,7 +21,6 @@ export const RepoListContainerStyled = styled.div`
   -ms-overflow-style: none; /* 'none' hides the scrollbar */
 `;
 
-// RepoItemStyled: Styles for each individual repository item.
 export const RepoItemStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +40,6 @@ export const RepoItemStyled = styled.div`
   }
 `;
 
-// RepoTitleStyled: Styles for the repository title.
 export const RepoTitleStyled = styled.h3`
   font-size: 1.25rem;
   font-weight: 600;
@@ -52,7 +49,6 @@ export const RepoTitleStyled = styled.h3`
   justify-content: start;
 `;
 
-// RepoDescriptionStyled: Styles for the repository description.
 export const RepoDescriptionStyled = styled.p`
   font-size: 1rem;
   color: #586069;
@@ -61,7 +57,6 @@ export const RepoDescriptionStyled = styled.p`
   justify-content: start;
 `;
 
-// RepoFooterStyled: Container for owner and star count.
 export const RepoFooterStyled = styled.div`
   display: flex;
   align-items: center;
@@ -69,7 +64,6 @@ export const RepoFooterStyled = styled.div`
   margin-top: 0.5rem;
 `;
 
-// RepoOwnerStyled: Styles for the repository owner information.
 export const RepoOwnerStyled = styled.div`
   display: flex;
   align-items: center;
@@ -77,14 +71,7 @@ export const RepoOwnerStyled = styled.div`
   font-size: 0.9rem;
 `;
 
-// RepoOwnerIconStyled: Placeholder for the owner's avatar/icon.
-// export const RepoOwnerIconStyled = styled.div`
-//   width: 20px;
-//   height: 20px;
-//   background-color: #d1d5da;
-//   border-radius: 50%;
-//   margin-right: 0.5rem;
-// `;
+
 
 export const RepoOwnerIconStyled = styled.img` // Changed to styled.img
   width: 20px;
@@ -95,7 +82,6 @@ export const RepoOwnerIconStyled = styled.img` // Changed to styled.img
   background-color: #d1d5da; /* Fallback background if image fails to load */
 `;
 
-// StarCountStyled: Styles for the star count.
 export const StarCountStyled = styled.div`
   display: flex;
   align-items: center;
@@ -103,7 +89,6 @@ export const StarCountStyled = styled.div`
   font-size: 0.9rem;
 `;
 
-// StarIconStyled: Styles for the star icon.
 export const StarIconStyled = styled(FaStar)`
   color: #e3b341;
   margin-right: 0.25rem;
