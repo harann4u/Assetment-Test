@@ -3,6 +3,7 @@ import { repoListApi } from "../../data/service/repolist.service";
 import { RepoDescriptionStyled, RepoFooterStyled, RepoItemStyled, RepoListContainerStyled, RepoOwnerIconStyled, RepoOwnerStyled, RepoTitleStyled, StarCountStyled, StarIconStyled } from "./repoList.styled"
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
+import { getstarValues } from "../../util/theme/helper";
 
 type RepoListType = {
   id: number;
@@ -20,8 +21,9 @@ type RepoListType = {
 export type RepoItems = {
   hasError: boolean,
   errorMessage: string,
-  hasMore:boolean,
-  items: RepoListType[]
+  items: RepoListType[],
+  hasMore?:boolean,
+  incomplete_results?: boolean
 }
 
 
@@ -40,32 +42,22 @@ const RepoList = () => {
       setErrorMessage(true);
     } else { 
       setRepoData((prev: RepoListType[]) => [...prev, ...repoList.items]);
-      // setHasMore(repoList.hasMore)
       setErrorMessage(false)
     }
-
   }
 
   console.log('repoData', repoData)
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
+    console.log("inside")
     if (target.isIntersecting && hasMore) {
+      console.log("inside123")
       setPage(prev => prev + 1);
     }
   }, [hasMore]);
 
-  const formatNumber = (num: number) => {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-    }
-    return num.toString();
-  };
-
-
+ 
 
 
   useEffect(() => {
@@ -106,7 +98,7 @@ const RepoList = () => {
           </RepoOwnerStyled>
           <StarCountStyled>
             <StarIconStyled />
-            <span>{formatNumber(repo.stargazers_count)}</span>
+            <span>{getstarValues(repo.stargazers_count)}</span>
           </StarCountStyled>
         </RepoFooterStyled>
       </RepoItemStyled>
