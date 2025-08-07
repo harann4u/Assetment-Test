@@ -4,11 +4,9 @@ interface NavItemProps {
   active?: boolean;
 }
 
-// NavBarStyled: The fixed navigation bar at the bottom of the content wrapper.
-// It is no longer 'position: fixed' relative to the viewport, but rather
-// fixed within the ContentWrapperStyled's flex layout.
+
 export const NavBarStyled = styled.div`
-  background-color: #ffffff; /* White background for the navbar */
+  background-color: lightGrey; /* White background for the navbar */
   border-top: 1px solid #e1e4e8; /* Separator line above the navbar */
   padding: 0.5rem 0;
   box-shadow: inset 1px 0 0 #e0e0e0, inset -1px 0 0 #e0e0e0; /* Side shadows */
@@ -17,7 +15,6 @@ export const NavBarStyled = styled.div`
   flex-shrink: 0; /* Prevent navbar from shrinking */
 `;
 
-// NavItemStyled: Styles for each navigation item (Trending, Settings).
 export const NavItemStyled = styled.div<NavItemProps>`
   display: flex;
   flex-direction: column;
@@ -29,7 +26,6 @@ export const NavItemStyled = styled.div<NavItemProps>`
   padding: 0.5rem 0;
 `;
 
-// NavIconStyled: Styles for the navigation icons.
 export const NavIconStyled = styled.div`
   font-size: 1.5rem;
   margin-bottom: 0.15rem;
