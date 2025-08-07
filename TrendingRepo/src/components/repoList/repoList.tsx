@@ -1,19 +1,50 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { repoListApi } from "../../data/service/repolist.service";
 import { RepoDescriptionStyled, RepoFooterStyled, RepoItemStyled, RepoListContainerStyled, RepoOwnerIconStyled, RepoOwnerStyled, RepoTitleStyled, StarCountStyled, StarIconStyled } from "./repoList.styled"
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+
+type RepoListType = {
+  id: number;
+  name: string;
+  description: string | null;
+  owner: {
+    avatar_url: string;
+    login: string;
+  };
+  full_name: string;
+  stargazers_count: number;
+}
+
+
+export type RepoItems = {
+  hasError: boolean,
+  errorMessage: string,
+  items: RepoListType[]
+}
 
 
 const RepoList = () => {
-  const [repoData, setRepoData] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
+  const [repoData, setRepoData] = useState<RepoListType[]>([]);
+  const [errorMesage, setErrorMessage] = useState(false)
+  const [hasMore] = useState(true);
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const [page, setPage] = useState(0);
 
 
   const fetchRepoList = async () => {
-    const repoList = await repoListApi(page);
-    setRepoData(pre => ([...pre, ...repoList.items]));
+    const repoList = await repoListApi(page) as RepoItems;
+    if (repoList.hasError) {
+      toast.error("Failed to fetch data");
+      setErrorMessage(true);
+    } else { 
+      setRepoData((prev: RepoListType[]) => [...prev, ...repoList.items]);
+      setErrorMessage(false)
+    }
+
   }
+
+  console.log('repoData', repoData)
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
@@ -22,7 +53,7 @@ const RepoList = () => {
     }
   }, [hasMore]);
 
-   const formatNumber = (num:number) => {
+  const formatNumber = (num: number) => {
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
     }
@@ -31,6 +62,9 @@ const RepoList = () => {
     }
     return num.toString();
   };
+
+
+
 
   useEffect(() => {
     const option = {
@@ -55,14 +89,15 @@ const RepoList = () => {
 
 
   return (<RepoListContainerStyled>
-    {repoData.map((repo: any, index: number) => (
+
+    {repoData.map((repo: RepoListType, index: number) => (
       <RepoItemStyled key={index}>
         <RepoTitleStyled>{repo.name}</RepoTitleStyled>
         <RepoDescriptionStyled>{repo.description}</RepoDescriptionStyled>
         <RepoFooterStyled>
           <RepoOwnerStyled>
             <RepoOwnerIconStyled
-              src={repo.owner.avatar_url} 
+              src={repo.owner.avatar_url}
               alt="Repository Owner Icon"
             />
             <span>{repo.full_name}</span>
@@ -75,7 +110,24 @@ const RepoList = () => {
       </RepoItemStyled>
     ))}
 
-    {hasMore && <div ref={loaderRef} style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}
+    {errorMesage && (<div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      padding: '2rem',
+      textAlign: 'center',
+    }}>
+      <div>Something went wrong. API get failed.</div>
+      <button
+        style={{ padding: '0.5rem', marginTop: '1rem' }}
+        onClick={fetchRepoList}
+      >
+        Retry
+      </button>
+    </div>)}
+
+    {hasMore && !errorMesage && <div ref={loaderRef} style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}
 
   </RepoListContainerStyled>)
 }

@@ -1,23 +1,39 @@
+import type { RepoItems } from "../../components/repoList/repoList";
 import { AxiosInstance } from "../axiosinstance";
 
-interface RepoListResponse {
-    incomplete_results: boolean;
-    items: RepoListItem[];
-    total_count:number
-}
 
-interface RepoListItem {
-    id: string,
-    description: string;
-}
 
-export const repoListApi = async (page:number) => {
+export const repoListApi = async (page: number) => {
     try {
-        const response = await AxiosInstance.get<RepoListResponse>(`/search/repositories?q=created:>2024-07-15&sort=stars&order=desc&page=${page}`);
-        return response.data
-    } catch(e){
-        console.log("expection", e)
-        return [];
-    } 
-       
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const response: any = await AxiosInstance.get(`/search/repositories?q=created:>2024-07-15&sort=stars&order=desc&page=${page}`);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data = response.data.items.map((item: any) => {
+            return {
+                id: item.id,
+                name: item.name,
+                description: item.description,
+                owner: {
+                    avatar_url: item.avatar_url,
+                    login: item.login
+                },
+                full_name: item.full_name,
+                stargazers_count: item.stargazers_count
+            }
+        })
+        const responseData: RepoItems = {
+            hasError: false,
+            errorMessage: "",
+            items: data
+        }
+        return responseData
+    } catch (e) {
+        console.log(" API get Failed expection", e)
+        return {
+            hasError: true,
+            errorMessage: "API get Failed",
+            items: []
+        };
+    }
+
 }
