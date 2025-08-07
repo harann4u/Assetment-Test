@@ -20,6 +20,7 @@ type RepoListType = {
 export type RepoItems = {
   hasError: boolean,
   errorMessage: string,
+  hasMore:boolean,
   items: RepoListType[]
 }
 
@@ -39,6 +40,7 @@ const RepoList = () => {
       setErrorMessage(true);
     } else { 
       setRepoData((prev: RepoListType[]) => [...prev, ...repoList.items]);
+      // setHasMore(repoList.hasMore)
       setErrorMessage(false)
     }
 

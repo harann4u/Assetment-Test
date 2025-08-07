@@ -24,7 +24,8 @@ export const repoListApi = async (page: number) => {
         const responseData: RepoItems = {
             hasError: false,
             errorMessage: "",
-            items: data
+            items: data,
+            hasMore:response.incomplete_results
         }
         return responseData
     } catch (e) {
@@ -32,7 +33,8 @@ export const repoListApi = async (page: number) => {
         return {
             hasError: true,
             errorMessage: "API get Failed",
-            items: []
+            items: [],
+            hasMore:false
         };
     }
 
