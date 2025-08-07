@@ -4,39 +4,38 @@ import styled from 'styled-components';
 
 
 export const RepoListContainerStyled = styled.div`
-  flex: 1; /* Allows this component to grow and take all available vertical space */
-  overflow-y: auto; /* Enables vertical scrolling for the repository list */
+  flex: 1; 
+  overflow-y: auto; 
 
-  /* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge, Opera) */
   &::-webkit-scrollbar {
-    display: none; /* Hide the scrollbar track and thumb */
-    width: 0; /* For horizontal scrollbar */
-    height: 0; /* For vertical scrollbar */
+    display: none; 
+    width: 0; 
+    height: 0; 
   }
 
-  /* Hide scrollbar for Firefox */
-  scrollbar-width: none; /* 'none' hides the scrollbar */
+  
+  scrollbar-width: none; 
 
-  /* Hide scrollbar for IE and Edge (older versions) */
-  -ms-overflow-style: none; /* 'none' hides the scrollbar */
+ 
+  -ms-overflow-style: none;
 `;
 
 export const RepoItemStyled = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start; /* Align content to the start (left) */
-  gap: 0.5rem; /* Space between title, description, and footer */
+  justify-content: start; 
+  gap: 0.5rem; 
   cursor: pointer;
 
   padding: 2rem;
-  border-bottom: 1px solid #e1e4e8; /* Separator line between repo items */
+  border-bottom: 1px solid #e1e4e8; 
 
   &:hover {
-    background-color: #f6f8fa; /* Light background on hover */
+    background-color: #f6f8fa; 
   }
 
   &:last-child {
-    border-bottom: none; /* No border for the last item */
+    border-bottom: none; 
   }
 `;
 
@@ -73,13 +72,13 @@ export const RepoOwnerStyled = styled.div`
 
 
 
-export const RepoOwnerIconStyled = styled.img` // Changed to styled.img
+export const RepoOwnerIconStyled = styled.img` 
   width: 20px;
   height: 20px;
-  border-radius: 50%; /* Makes the image circular */
+  border-radius: 50%; 
   margin-right: 0.5rem;
-  object-fit: cover; /* Ensures the image covers the area without distortion */
-  background-color: #d1d5da; /* Fallback background if image fails to load */
+  object-fit: cover; 
+  background-color: #d1d5da; 
 `;
 
 export const StarCountStyled = styled.div`

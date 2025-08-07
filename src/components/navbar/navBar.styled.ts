@@ -6,13 +6,13 @@ interface NavItemProps {
 
 
 export const NavBarStyled = styled.div`
-  background-color: lightGrey; /* White background for the navbar */
-  border-top: 1px solid #e1e4e8; /* Separator line above the navbar */
+  background-color: lightGrey; 
+  border-top: 1px solid #e1e4e8; 
   padding: 0.2rem 0;
-  box-shadow: inset 1px 0 0 #e0e0e0, inset -1px 0 0 #e0e0e0; /* Side shadows */
+  box-shadow: inset 1px 0 0 #e0e0e0, inset -1px 0 0 #e0e0e0; 
   display: flex;
   justify-content: space-around;
-  flex-shrink: 0; /* Prevent navbar from shrinking */
+  flex-shrink: 0; 
 `;
 
 export const NavItemStyled = styled.div<NavItemProps>`

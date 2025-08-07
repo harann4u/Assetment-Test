@@ -13,7 +13,7 @@ export const ErrorContainerStyled = styled.div`
 export const RetryButtonStyled = styled.button`
   padding: 0.5rem 1rem;
   margin-top: 1rem;
-  background-color: #0366d6; /* A common blue for actions */
+  background-color: #0366d6; 
   color: white;
   border: none;
   border-radius: 5px;
